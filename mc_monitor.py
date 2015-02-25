@@ -40,7 +40,7 @@ if __name__ == "__main__":
         if not(os.path.isfile(mute)):
           mailer.sendMail(recipient, sender,
                           "Minecraft Server Down - Restart Attempted",
-                          "%s was not responding and a restart has been attmpted.\r\nCheck logs for details." % server)
+                          "%s was not responding and a restart has been attempted.\r\nCheck logs for details." % server)
         os.remove(reboot)
         open(followup, 'a').close()
       else:
