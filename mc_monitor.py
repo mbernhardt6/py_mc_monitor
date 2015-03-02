@@ -24,12 +24,11 @@ if __name__ == "__main__":
   if not(os.path.isfile(nocheck)):
     status = nettools.checkPort(server, port)
     logger.logMessage(log, "Status returned %s" % status)
-    
     if (status != "open"):
       if (os.path.isfile(followup) and not(os.path.isfile(mute))):
         logger.logMessage(log, "%s restart attempted. Muting until restore." % server)
-        mailer.sendMail(recipient, sender, 
-                        "Minecraft Server Restart Failed - Muting until restore", 
+        mailer.sendMail(recipient, sender,
+                        "Minecraft Server Restart Failed - Muting until restore",
                         "%s restart failed.\r\nMuting until restore." % server)
         open(mute, 'a').close()
         os.remove(followup)
