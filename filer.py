@@ -95,9 +95,10 @@ def SetPid(pid_file, log):
       return False
     except:
       try:
+        logger.logMessage(log, "Stale pid: %s" % pid_file)
         os.unlink(pid_file)
       except:
-        pass
+        logger.logMessage(log, "Unable to clear stale pid: %s" % pid_file)
   pid = str(os.getpid())
   file(pid_file, 'w').write(pid)
   return True

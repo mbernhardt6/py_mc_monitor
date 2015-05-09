@@ -21,6 +21,7 @@ base_path = "/home/mark/mc_monitor"
 nocheck = base_path + "nocheck"
 pid_file = "/tmp/mc_monitor.pid"
 wait_time = 300
+mute_reset = 12
 
 if __name__ == "__main__":
   # Is a reboot required?
@@ -29,6 +30,8 @@ if __name__ == "__main__":
   followup = False
   # Is the script muted from sending email?
   mute = False
+  # Loop count to determine when to reset mute.
+  mute_loop = 0
   if filer.SetPid(pid_file, log):
     logger.logMessage(log, "Pid file set. Starting monitor.")
     while 1:
@@ -67,4 +70,9 @@ if __name__ == "__main__":
                 "%s restart successful.\r\nServer is back online." % server)
             followup = False
           mute = False
+      if mute:
+        if loop > mute_loop:
+          mute = False
+        else:
+          loop += 1
       time.sleep(wait_time)
