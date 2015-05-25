@@ -71,8 +71,10 @@ if __name__ == "__main__":
             followup = False
           mute = False
       if mute:
-        if loop > mute_loop:
+        if mute_loop > mute_reset:
+          logger.logMessage(log, "Unsetting mute.")
           mute = False
+          mute_loop = 0
         else:
-          loop += 1
+          mute_loop += 1
       time.sleep(wait_time)
