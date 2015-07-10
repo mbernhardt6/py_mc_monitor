@@ -42,8 +42,8 @@ if __name__ == "__main__":
             logger.logMessage(log, "%s restart attempted. Muting until restore." %
                 server)
             mailer.sendMail(recipient, sender,
-                "Minecraft Server Restart Failed - Muting until restore",
-                "%s restart failed.\r\nMuting until restore." % server)
+                "Minecraft Server Restart Failed",
+                "%s restart failed.\r\nWill remind again after %s attempts." % (server, mute_reset))
             mute = True
             followup = False
           if reboot:
