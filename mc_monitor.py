@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.7
+#!/usr/bin/python2.7
 
 # Homegrown Modules
 import filer
@@ -18,6 +18,8 @@ recipient = 'mbernhardt6@gmail.com'
 sender = 'mbernhardt6@gmail.com'
 log = '/home/minecraft/scripts/mc_monitor.log'
 base_path = '/home/minecraft/scripts/mc_monitor'
+server_path = '/home/minecraft'
+start_server = server_path + '/start-server.sh'
 nocheck = base_path + 'nocheck'
 pid_file = '/tmp/mc_monitor.pid'
 wait_time = 300
@@ -50,8 +52,7 @@ if __name__ == '__main__':
             mute = True
             followup = False
           if reboot:
-            result = subprocess.call('/home/minecraft/start-server.sh',
-                                     cwd='/home/minecraft')
+            result = subprocess.Popen(start_server, cwd=server_path)
             logger.logMessage(log, 'Server restart attempted.')
             logger.logMessage(log, '%s' % result)
             if not mute:
